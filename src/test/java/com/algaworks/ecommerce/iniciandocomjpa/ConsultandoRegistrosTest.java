@@ -1,41 +1,57 @@
 package com.algaworks.ecommerce.iniciandocomjpa;
 
+import com.algaworks.ecommerce.model.Produto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 
 class ConsultandoRegistrosTest {
 
     private static EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
-    // Antes de tudo cria uma fabrica de conexão
     @BeforeAll
     public static void setUpBeforeAll() {
         entityManagerFactory = Persistence
                 .createEntityManagerFactory("Ecommerce-PU");
     }
 
-    // Após tudo fecha uma fabrica a conexão
     @AfterAll
     public static void tearDownAfterAll() {
         entityManagerFactory.close();
     }
 
-    // Antes de cada teste abre a conexão
     @BeforeEach
     public void setUp() {
         entityManager = entityManagerFactory.createEntityManager();
     }
 
-    // Após cada teste fecha a conexão
     @AfterEach
     public void tearDown() {
         entityManager.close();
+    }
+
+    @Test
+    @DisplayName("Buscar por identificador")
+    public void buscarPorIdentificador() {
+        Produto produto = entityManager.find(Produto.class, 1L);
+//      Produto produto = entityManager.getReference(Produto.class, 1L);
+
+        System.out.println("aqui");
+        Assertions.assertNotNull(produto);
+        Assertions.assertEquals("Kindle", produto.getNome());
+    }
+
+    @Test
+    @DisplayName("Atualiza a referência")
+    public void atualizarAReferencia() {
+        Produto produto = entityManager.find(Produto.class, 1);
+        produto.setNome("Microfone Samson");
+
+        entityManager.refresh(produto);
+
+        Assertions.assertEquals("Kindle", produto.getNome());
     }
 
 }
