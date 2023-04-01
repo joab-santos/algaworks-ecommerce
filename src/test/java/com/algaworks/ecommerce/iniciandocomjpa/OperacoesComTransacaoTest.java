@@ -11,6 +11,46 @@ import java.math.BigDecimal;
 public class OperacoesComTransacaoTest extends EntityManagerTest {
 
     @Test
+    @DisplayName("mostrar diferença persist e merge")
+    public void mostrarDiferencaPersistMerge(){
+        Produto produtoPersist = new Produto();
+
+        produtoPersist.setId(5L);
+        produtoPersist.setNome("Smartphone One PLus");
+        produtoPersist.setDescricao("O processador mais rápido");
+        produtoPersist.setPreco(new BigDecimal(2_000));
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(produtoPersist);
+        produtoPersist.setNome("Smarphone Two Plus");
+        entityManager.getTransaction().commit();
+
+        entityManager.clear();
+
+        Produto produtoVerificacaoPersist = entityManager.find(Produto.class, produtoPersist.getId());
+        Assertions.assertNotNull(produtoVerificacaoPersist);
+
+        System.out.println("--------------------------");
+
+        Produto produtoMerge = new Produto();
+
+        produtoMerge.setId(6L);
+        produtoMerge.setNome("Notebook Dell");
+        produtoMerge.setDescricao("O melhor da categoria.");
+        produtoMerge.setPreco(new BigDecimal(2_000));
+
+        entityManager.getTransaction().begin();
+        Produto merge = entityManager.merge(produtoMerge);
+        merge.setNome("Notebook Dell 2");
+        entityManager.getTransaction().commit();
+
+        entityManager.clear();
+
+        Produto produtoVerificacaoMerge = entityManager.find(Produto.class, produtoMerge.getId());
+        Assertions.assertNotNull(produtoVerificacaoMerge);
+
+    }
+    @Test
     @DisplayName("Inserir objeto com merge")
     public void inserirObjetoComMerge(){
         Produto produto = new Produto();
