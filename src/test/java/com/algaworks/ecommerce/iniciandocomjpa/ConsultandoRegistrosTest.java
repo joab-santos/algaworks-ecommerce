@@ -6,7 +6,29 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 class ConsultandoRegistrosTest extends EntityManagerTest {
+
+    @Test
+    public void atualizarObjeto() {
+        Produto produto = new Produto();
+        produto.setId(1L);
+        produto.setNome("Kindle Peperwhite");
+        produto.setDescricao("Conheça o novo Kindle");
+        produto.setPreco(new BigDecimal(599));
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(produto);
+        entityManager.getTransaction().commit();
+
+        entityManager.clear();
+
+        Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
+        Assertions.assertNotNull(produtoVerificacao);
+        Assertions.assertEquals("Kindle Peperwhite", produtoVerificacao.getNome());
+    }
+
 
     @Test
     @DisplayName("Buscar por identificador")
