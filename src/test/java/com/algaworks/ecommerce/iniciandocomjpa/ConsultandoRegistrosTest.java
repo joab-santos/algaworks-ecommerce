@@ -11,6 +11,21 @@ import java.math.BigDecimal;
 class ConsultandoRegistrosTest extends EntityManagerTest {
 
     @Test
+    @DisplayName("Atualizar objeto gerenciado")
+    public void atualizarObjetoGerenciado() {
+        Produto produto = entityManager.find(Produto.class,1L);
+        produto.setNome("Kindle Peperwhite 2ª geração");
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(produto);
+        entityManager.getTransaction().commit();
+
+        entityManager.clear();
+
+        Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
+        Assertions.assertEquals("Kindle Peperwhite 2ª geração", produtoVerificacao.getNome());
+    }
+    @Test
     public void atualizarObjeto() {
         Produto produto = new Produto();
         produto.setId(1L);
