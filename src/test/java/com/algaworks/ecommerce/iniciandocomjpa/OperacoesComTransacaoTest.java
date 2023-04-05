@@ -10,6 +10,24 @@ import java.math.BigDecimal;
 
 public class OperacoesComTransacaoTest extends EntityManagerTest {
 
+
+    @Test
+    @DisplayName("Impedir operação com banco de dados")
+    public void impedirOperacaoComBancoDeDados() {
+        Produto produto = entityManager.find(Produto.class,1L);
+
+        entityManager.getTransaction().begin();
+        produto.setNome("Kindle Peperwhite 2ª geração");
+        entityManager.merge(produto);
+        entityManager.detach(produto);
+        entityManager.getTransaction().commit();
+
+        entityManager.clear();
+
+        Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
+        Assertions.assertEquals("Kindle", produtoVerificacao.getNome());
+    }
+
     @Test
     @DisplayName("mostrar diferença persist e merge")
     public void mostrarDiferencaPersistMerge(){
