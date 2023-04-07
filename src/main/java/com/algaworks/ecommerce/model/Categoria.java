@@ -15,13 +15,34 @@ import lombok.Setter;
 @Table(name = "categoria")
 public class Categoria {
 
-    @EqualsAndHashCode.Include
-    @Id
     private Long id;
-
     private String nome;
-
-    @Column(name = "categoria_pai_id")
     private Long categoriaPaiId;
 
+    @EqualsAndHashCode.Include
+    @Id
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Column(name = "categoria_pai_id")
+    public Long getCategoriaPaiId() {
+        return categoriaPaiId;
+    }
+
+    public void setCategoriaPaiId(Long categoriaPaiId) {
+        this.categoriaPaiId = categoriaPaiId;
+    }
 }
