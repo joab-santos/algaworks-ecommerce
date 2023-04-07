@@ -15,20 +15,20 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "pedido")
+@Table(name = "pedido" )
 public class Pedido {
 
     @EqualsAndHashCode.Include
     @Id
     private Long id;
 
-    @Column(name = "data_pedido")
+    @Column(name = "data_pedido" )
     private LocalDateTime dataPedido;
 
-    @Column(name = "data_conclusao")
+    @Column(name = "data_conclusao" )
     private LocalDateTime dataConclusao;
 
-    @Column(name = "nota_fiscal_id")
+    @Column(name = "nota_fiscal_id" )
     private Long notaFiscalId;
 
     private BigDecimal total;
