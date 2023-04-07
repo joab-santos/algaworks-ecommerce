@@ -17,8 +17,11 @@ public class Produto {
     @EqualsAndHashCode.Include
     @Id
     private Long id;
+
     private String nome;
+
     private String descricao;
+
     private BigDecimal preco;
 
 }

@@ -10,14 +10,16 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Cliente {
+public class PagamentoBoleto {
 
-    @Id
     @EqualsAndHashCode.Include
+    @Id
     private Long id;
 
-    private String nome;
+    private Long pedidoId;
 
-    private SexoCliente sexo;
+    private StatusPagamento status;
+
+    private String codigoBarras;
 
 }
