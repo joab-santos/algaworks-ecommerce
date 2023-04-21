@@ -22,14 +22,18 @@ public class Pedido {
     @Column(name = "data_pedido" )
     private LocalDateTime dataPedido;
 
-    @Column(name = "data_conclusao" )
+    @Column(name = "data_conclusao")
     private LocalDateTime dataConclusao;
 
-    @Column(name = "nota_fiscal_id" )
+    @Column(name = "nota_fiscal_id")
     private Long notaFiscalId;
 
     private BigDecimal total;
 
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
+
+    @Embedded
+    private EnderecoEntregaPedido enderecoEntrega;
+
 }
