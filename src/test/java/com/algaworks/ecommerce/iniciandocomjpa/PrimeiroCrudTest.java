@@ -10,7 +10,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
     @Test
     void create() {
         Cliente cliente = new Cliente();
-        cliente.setId(3L);
+        //cliente.setId(3L); Comentado porque estamos utilizando IDENTITY
         cliente.setNome("Aurora Bárbara Daiane Gomes");
 
         entityManager.getTransaction().begin();

@@ -33,7 +33,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
     public void mostrarDiferencaPersistMerge(){
         Produto produtoPersist = new Produto();
 
-        produtoPersist.setId(5L);
+        //produtoPersist.setId(5L); Comentado porque estamos utilizando IDENTITY
         produtoPersist.setNome("Smartphone One PLus");
         produtoPersist.setDescricao("O processador mais rápido");
         produtoPersist.setPreco(new BigDecimal(2_000));
@@ -52,7 +52,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
 
         Produto produtoMerge = new Produto();
 
-        produtoMerge.setId(6L);
+        produtoMerge.setId(5L);
         produtoMerge.setNome("Notebook Dell");
         produtoMerge.setDescricao("O melhor da categoria.");
         produtoMerge.setPreco(new BigDecimal(2_000));
@@ -107,7 +107,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
     public void inserirOPrimeiroObjeto(){
         Produto produto = new Produto();
 
-        produto.setId(2L);
+        //produto.setId(2L); Comentado porque estamos utilizando IDENTITY
         produto.setNome("Câmera Canon");
         produto.setDescricao("A melhor definição para suas fotos");
         produto.setPreco(new BigDecimal(5_000));
