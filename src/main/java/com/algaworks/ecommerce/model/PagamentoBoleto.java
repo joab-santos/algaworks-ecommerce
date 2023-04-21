@@ -14,6 +14,7 @@ public class PagamentoBoleto {
 
     @EqualsAndHashCode.Include
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "pedido_id")
