@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +28,9 @@ public class Pedido {
 
     @Column(name = "data_pedido")
     private LocalDateTime dataPedido;
+
+    @OneToMany(mappedBy = "pedido")
+    private List<ItemPedido> itens;
 
     @Column(name = "data_conclusao")
     private LocalDateTime dataConclusao;
